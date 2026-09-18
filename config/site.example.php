@@ -10,5 +10,5 @@ return [
     'homepage_og_title' => 'CPU Benchmark Leaderboard',
     'homepage_og_description' => 'Community CPU benchmark leaderboard powered by CoreMark submissions.',
     // 一键 CoreMark 跑分脚本地址（可换成你自己托管的脚本）
-    'coremark_script_url' => getenv('COREMARK_SCRIPT_URL') ?: 'https://17nas.com/coremark/run.sh',
+    'coremark_script_url' => getenv('COREMARK_SCRIPT_URL') ?: '/coremark/run.sh',
 ];
