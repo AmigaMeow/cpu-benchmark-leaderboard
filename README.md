@@ -8,7 +8,17 @@
 
 按架构浏览、筛选、对比 CPU 跑分：`x86_64` / `ARM64` / `ARMv7` / `Other`。
 
+> ⚠️ **本仓库自带的是虚构示例数据**（`sql/seed.sql`：24 个 CPU 型号 + 25 条跑分样本），仅用于演示界面。
+> 真实数据来自用户在本站运行 CoreMark 后提交的跑分（提交链路不含在本仓库内）。
+
 > 由 [17nas.com](https://17nas.com/) 开源 —— 一个 NAS 与网络工具站。
+
+## Screenshots
+
+| 天梯榜 | CPU 详情页 | CPU 对比页 |
+|---|---|---|
+| ![Leaderboard](docs/screenshots/leaderboard.png) | ![CPU detail](docs/screenshots/cpu-detail.png) | ![CPU compare](docs/screenshots/cpu-compare.png) |
+*截图均为虚构示例数据*
 
 ---
 
