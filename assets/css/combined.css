@@ -1,0 +1,1222 @@
+/* 17NAS 合并CSS - 优化加载性能 */
+/* 包含：style.css + navbar-unified.css */
+/* 版本：1.1.0 */
+
+/* ============================================
+   来自 style.css
+   ============================================ */
+body {
+    color: #121212;
+    font-size: 14px;
+    font-family: "Helvetica Neue", "Segoe UI", Arial, "PingFang SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+    background-color: #F7F7F7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: #333;
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* 导航栏样式已移至 /css/navbar-unified.css */
+
+/* ============================================
+   来自 navbar-unified.css
+   ============================================ */
+/*
+ * 17NAS 统一导航栏样式
+ * Version: 7.0 - Modern Unified Design
+ * 与主页风格保持一致的现代化导航栏
+ */
+
+/* ========================================
+   基础样式重置
+   ======================================== */
+.top-navbar * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.top-navbar ul {
+    list-style: none;
+}
+
+.top-navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========================================
+   导航栏容器
+   ======================================== */
+.top-navbar {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.navbar-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    height: 48px;
+}
+
+/* ========================================
+   Logo 区域
+   ======================================== */
+.navbar-logo {
+    flex-shrink: 0;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.logo-link:hover {
+    background: rgba(0, 0, 0, 0.03);
+    transform: translateY(-2px);
+}
+
+.logo-img {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
+.logo-text {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c3e50;
+    letter-spacing: 0.5px;
+}
+
+/* ========================================
+   导航菜单
+   ======================================== */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    margin: 0 40px;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.menu-icon {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    stroke: currentColor;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.menu-text {
+    font-size: 14px;
+}
+
+/* 下拉箭头 */
+.dropdown-arrow {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    transition: transform 0.3s ease;
+    margin-left: -2px;
+}
+
+/* 悬停效果 */
+.menu-link:hover {
+    background: #f5f5f5;
+    color: #333;
+    transform: translateY(-2px);
+}
+
+.menu-link:hover .menu-icon {
+    transform: scale(1.1);
+}
+
+.menu-dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* 激活状态 */
+.menu-item.active .menu-link {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item.active .menu-link:hover {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   下拉菜单
+   ======================================== */
+.dropdown-submenu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    min-width: 220px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #f0f0f0;
+}
+
+/* 下拉菜单小三角 */
+.dropdown-submenu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border-left: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+}
+
+.menu-dropdown:hover .dropdown-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.submenu-link {
+    display: block;
+    padding: 12px 16px;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.submenu-link:hover {
+    background: #f5f5f5;
+    color: #333;
+    transform: translateX(4px);
+}
+
+.submenu-divider {
+    height: 1px;
+    background: #f0f0f0;
+    margin: 4px 8px;
+}
+
+.submenu-category {
+    padding: 6px 16px 2px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    pointer-events: none;
+}
+
+.submenu-link-more {
+    color: #667eea !important;
+    font-size: 13px;
+    text-align: center;
+}
+
+.submenu-link-more:hover {
+    color: #5a6fd6 !important;
+}
+
+.dropdown-submenu-wide {
+    min-width: 200px;
+}
+
+.submenu-tag {
+    color: #666;
+    font-size: 13px;
+}
+
+/* ========================================
+   用户认证区域
+   ======================================== */
+.navbar-auth {
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+#userAuthArea {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.auth-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+}
+
+.auth-btn-login {
+    background: transparent;
+    color: #333;
+    border: 2px solid #e0e0e0;
+}
+
+.auth-btn-login:hover {
+    background: #f5f5f5;
+    border-color: #666;
+    color: #333;
+    transform: translateY(-2px);
+}
+
+.auth-btn-register {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+    color: #ffffff;
+    border: none;
+}
+
+.auth-btn-register:hover {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.auth-btn-user {
+    background: #f5f5f5;
+    color: #333;
+    border: 2px solid #e0e0e0;
+}
+
+.auth-btn-user img {
+    width: 28px !important;
+    height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid #fff !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+}
+
+.auth-btn-user:hover {
+    background: #e8e8e8;
+    border-color: #666;
+    color: #333;
+}
+
+.auth-btn-logout {
+    background: transparent;
+    color: #666;
+    border: 2px solid #e0e0e0;
+}
+
+.auth-btn-logout:hover {
+    background: #fff5f5;
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.auth-btn-admin {
+    background: linear-gradient(135deg, #555 0%, #333 100%);
+    color: #ffffff;
+    border: none;
+}
+
+.auth-btn-admin:hover {
+    background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   移动端菜单按钮
+   ======================================== */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle:hover .hamburger-line {
+    background: #333;
+}
+
+/* 移动端菜单打开状态 */
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+/* 平板设备 */
+@media (max-width: 1024px) {
+    .navbar-container {
+        height: 65px;
+    }
+
+    .navbar-menu {
+        margin: 0 20px;
+        gap: 4px;
+    }
+
+    .menu-link {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    .menu-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .menu-text {
+        font-size: 14px;
+    }
+
+    .auth-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+}
+
+/* 中等桌面宽度：优先保证右侧登录/注册按钮可见 */
+@media (max-width: 1360px) {
+    .navbar-menu {
+        margin: 0 12px;
+        gap: 4px;
+        overflow: hidden;
+    }
+
+    .menu-link {
+        padding: 7px 10px;
+        gap: 5px;
+    }
+
+    .menu-text {
+        font-size: 13px;
+    }
+
+    #userAuthArea {
+        gap: 8px;
+    }
+
+    .auth-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
+/* 移动设备 */
+@media (max-width: 768px) {
+    /* 顶部导航栏 - 只显示Logo和菜单按钮 */
+    .top-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .navbar-container {
+        height: 60px;
+        padding: 0 15px;
+        justify-content: center;
+        position: relative;
+    }
+
+    .navbar-logo {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+
+    .mobile-menu-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .logo-img {
+        height: 30px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    /* 为固定导航栏添加占位空间 */
+    body {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;  /* 改为60px，匹配新导航高度 */
+    }
+
+    /* 移动端汉堡按钮 - 显示（打开侧边栏） */
+    .mobile-menu-toggle {
+        display: flex !important;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* 隐藏桌面端认证按钮 */
+    .navbar-auth {
+        display: none !important;
+    }
+
+    /* 移动端菜单 - 完全隐藏header中的旧navbar-menu，使用新的#mobileNav代替 */
+    .navbar-menu {
+        display: none !important;
+    }
+
+    .menu-item {
+        display: none !important;
+    }
+
+    .menu-link {
+        display: none !important;
+    }
+
+    /* 隐藏下拉箭头 */
+    .dropdown-arrow {
+        display: none !important;
+    }
+
+    /* 移动端下拉菜单 - 隐藏 */
+    .dropdown-submenu {
+        display: none !important;
+    }
+
+    /* 移动端激活状态优化 */
+    .menu-item.active .menu-link {
+        background: rgba(44, 62, 80, 0.08);
+        color: #2c3e50;
+    }
+
+    .menu-item.active .menu-icon {
+        color: #2c3e50;
+    }
+
+    .dropdown-submenu::before {
+        display: none;
+    }
+
+    .menu-dropdown.active .dropdown-submenu {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    .submenu-link {
+        padding: 12px 24px;
+    }
+
+    /* 移动端用户认证区域 */
+    .navbar-auth {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        padding: 15px 20px;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        display: none;
+    }
+
+    .navbar-menu.active ~ .navbar-auth {
+        display: block;
+    }
+
+    #userAuthArea {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .auth-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+/* 小屏幕移动设备 */
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 0 12px;
+    }
+
+    .logo-img {
+        height: 26px;
+    }
+
+    .logo-text {
+        font-size: 18px;
+        margin-left: 8px;
+    }
+
+    .menu-link {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+
+    .menu-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ========================================
+   动画效果
+   ======================================== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.top-navbar {
+    animation: fadeInDown 0.4s ease-out;
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ========================================
+   打印样式
+   ======================================== */
+@media print {
+    .top-navbar {
+        position: static;
+        box-shadow: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .mobile-menu-toggle,
+    .navbar-auth {
+        display: none;
+    }
+}
+
+/* ========================================
+   文章页面样式 - Article Styles
+   从article.php迁移至此以支持Swup过渡
+   ======================================== */
+
+/* 文章容器 */
+.article-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    position: relative;
+}
+
+.article-main {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 文章头部 */
+.article-header {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.article-cover-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    margin: 0 0 28px;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.article-category {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.article-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+/* 文章元信息 - 高优先级确保覆盖 Bootstrap */
+.article-header .article-meta,
+.article-meta {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px 20px !important;
+    font-size: 14px !important;
+    color: #666 !important;
+}
+
+.article-header .meta-item,
+.meta-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.article-header .meta-item i,
+.meta-item i {
+    color: #666 !important;
+}
+
+/* 文章内容 - mdnice样式兼容 */
+.article-content {
+    font-size: 16px;
+    line-height: 1.8em;
+    color: #333;
+    font-family: Optima, "Microsoft YaHei", PingFangSC-regular, serif;
+}
+
+/* mdnice section样式 */
+.article-content section p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    line-height: 1.8em;
+    letter-spacing: 0em;
+    text-indent: 0em;
+    padding: 8px 0px;
+}
+
+.article-content section h2 {
+    margin: 30px 0px 15px;
+    padding: 0px;
+}
+
+.article-content section h2 .content {
+    font-size: 22px;
+    line-height: 1.5em;
+    letter-spacing: 0em;
+    display: block;
+    font-weight: 700;
+}
+
+.article-content section h3 {
+    margin: 30px 0px 15px;
+    padding: 0px;
+}
+
+.article-content section h3 .content {
+    font-size: 20px;
+    line-height: 1.5em;
+    letter-spacing: 0em;
+    display: block;
+    font-weight: 700;
+}
+
+.article-content section h4 .content {
+    font-size: 18px;
+    line-height: 1.5em;
+    letter-spacing: 0em;
+    display: block;
+    font-weight: 700;
+}
+
+.article-content section img {
+    display: block;
+    margin: 0px auto;
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.article-content section ul,
+.article-content section ol {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 0px 0px 0px 25px;
+}
+
+.article-content section li section {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 1.8em;
+    letter-spacing: 0em;
+}
+
+.article-content section code {
+    color: rgb(30, 107, 184);
+    font-size: 14px;
+    line-height: 1.8em;
+    letter-spacing: 0em;
+    background: rgba(27, 31, 35, 0.05);
+    margin: 0px 2px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: Consolas, Monaco, Menlo, monospace;
+    word-break: break-all;
+}
+
+.article-content section pre {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;
+}
+
+.article-content section pre code {
+    overflow-x: auto;
+    padding: 15px 16px 16px;
+    color: rgb(171, 178, 191);
+    background: rgb(40, 44, 52);
+    border-radius: 5px;
+    display: block;
+    font-family: Consolas, Monaco, Menlo, monospace;
+    font-size: 12px;
+}
+
+.article-content section blockquote {
+    padding: 10px 10px 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-width: 3px;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: solid;
+    border-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0px;
+    background: rgba(0, 0, 0, 0.05);
+    overflow: auto;
+}
+
+.article-content section blockquote p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-indent: 0em;
+    padding: 8px 0px;
+    line-height: 1.8em;
+    letter-spacing: 0em;
+}
+
+.article-content section strong {
+    font-weight: bold;
+}
+
+/* 通用Markdown样式 */
+.article-content h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em 0 0.5em;
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.article-content h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 1em 0 0.5em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.article-content h3 {
+    font-size: 1.25em;
+    font-weight: bold;
+    margin: 1em 0 0.5em;
+}
+
+.article-content h4 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 1em 0 0.5em;
+}
+
+.article-content p {
+    margin: 1em 0;
+    line-height: 1.8;
+}
+
+.article-content ul,
+.article-content ol {
+    margin: 1em 0;
+    padding-left: 2em;
+    line-height: 1.8;
+}
+
+.article-content li {
+    margin: 0.5em 0;
+}
+
+.article-content code {
+    background: rgba(27, 31, 35, 0.05);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', Consolas, Monaco, monospace;
+    font-size: 0.9em;
+    color: #d73a49;
+}
+
+.article-content pre {
+    background: #f6f8fa;
+    padding: 16px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1em 0;
+}
+
+.article-content pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-size: 0.85em;
+}
+
+.article-content blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 1em;
+    color: #6a737d;
+    margin: 1em 0;
+}
+
+.article-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.article-content table th,
+.article-content table td {
+    border: 1px solid #dfe2e5;
+    padding: 8px 12px;
+}
+
+.article-content table th {
+    background: #f6f8fa;
+    font-weight: bold;
+}
+
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+    border-radius: 6px;
+}
+
+.article-content a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.article-content a:hover {
+    text-decoration: underline;
+}
+
+.article-content hr {
+    border: none;
+    border-top: 2px solid #e5e7eb;
+    margin: 2em 0;
+}
+
+/* 文章底部 */
+.article-footer {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 2px solid #f0f0f0;
+    text-align: center;
+}
+
+.back-to-list {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-to-list:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+/* 加载动画 */
+.loading {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 目录导航 - 高优先级确保覆盖其他样式 */
+.toc-sidebar {
+    position: fixed !important;
+    right: 20px !important;
+    top: 100px !important;
+    width: 200px !important;
+    max-height: calc(100vh - 120px) !important;
+    overflow-y: auto !important;
+    transition: opacity 0.3s ease !important;
+    z-index: 1 !important;
+    display: block !important;
+}
+
+.toc-card {
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 12px 14px;
+    border-left: 3px solid #2c3e50;
+}
+
+.toc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.toc-title i {
+    font-size: 12px;
+    color: #666;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-item {
+    margin-bottom: 2px;
+}
+
+.toc-link {
+    display: block;
+    padding: 4px 8px;
+    color: #666;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+}
+
+.toc-link:hover {
+    background: rgba(44, 62, 80, 0.05);
+    color: #2c3e50;
+}
+
+.toc-link.active {
+    background: rgba(44, 62, 80, 0.1);
+    color: #2c3e50;
+    font-weight: 600;
+    border-left-color: #2c3e50;
+}
+
+/* 二级标题缩进 */
+.toc-item.level-3 .toc-link {
+    padding-left: 20px;
+    font-size: 12px;
+}
+
+/* 滚动条样式 */
+.toc-sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.toc-sidebar::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.toc-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+/* 目录响应式 - 小屏幕隐藏 */
+@media (max-width: 1400px) {
+    .toc-sidebar {
+        display: none !important;
+    }
+}
+
+/* 文章页面响应式 */
+@media (max-width: 768px) {
+    .article-container {
+        padding: 20px 15px 60px;
+    }
+
+    .article-title {
+        font-size: 24px;
+    }
+
+    .article-content {
+        font-size: 15px;
+    }
+}
+
+/* 图标化工具下拉菜单项 */
+.submenu-tool-icon {
+    display: inline-block;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+    object-fit: contain;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+img.submenu-tool-icon {
+    fill: none;
+    stroke: none;
+    stroke-width: 0;
+}
+
+.submenu-tool-icon-fill {
+    fill: currentColor;
+    stroke: none;
+}
