@@ -1,0 +1,667 @@
+#mainLayout {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* 搜索栏与排行榜共用内容宽度，CPU 名称列与数据条在同一表格内统一对齐。 */
+#tableContentWrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#tableContentWrapper > p {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* 标题样式 */
+#caption {
+    text-align: center;
+    font-size: 60px;
+    margin-top: 50px;
+    margin-bottom: 0;
+    letter-spacing: 3px;
+    color: #333;
+}
+
+#caption b {
+    font-weight: 700;
+}
+
+/* 统计横幅 */
+.stats-banner {
+    background: #f8f8f8;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.stats-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: #666;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-item i {
+    color: #2c3e50;
+}
+
+.stat-item strong {
+    color: #1a1a1a;
+}
+
+/* 提示文字 */
+.notice {
+    text-align: center;
+    margin: 0 auto;
+    color: #666;
+    max-width: 860px;
+}
+
+.notice .faq-link {
+    color: #667eea;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+/* 数据表格 */
+.data {
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto 40px;
+    border-spacing: 0;  /* 确保单元格之间无间距 */
+    border: 0;  /* 确保没有边框 */
+}
+
+.data tr {
+    margin: 0;
+    padding: 0;
+    line-height: 1;  /* 减少行高 */
+}
+
+.data td {
+    padding: 4px 0;  /* 添加上下4px的内边距，保持左右0 */
+    margin: 0;
+    vertical-align: middle;
+    border: 0;  /* 确保单元格没有边框 */
+}
+
+/* CPU名称列 */
+.socName {
+    text-align: right;
+    height: 32px;  /* 增加高度到32px，让行间距更舒适 */
+    font-size: 22px;
+    color: #222;
+    font-weight: 500;
+    line-height: 32px;  /* 行高与高度一致 */
+    white-space: nowrap;  /* 防止换行 */
+}
+
+/* 名称右侧贴近数据条，列宽由 colgroup 控制，避免表格自动分配出大块空白。 */
+.data td.socName {
+    padding-left: 0;
+    padding-right: 8px;
+}
+
+.data .cpu-name-column {
+    width: clamp(330px, 26vw, 410px);
+}
+
+/* 桌面端 - CPU名称和图标 */
+.socName svg {
+    width: 28px;
+    height: 28px;
+    margin-left: 6px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+/* 进度条容器 */
+.ratioBar {
+    width: 100%;
+    height: 32px;  /* 与socName高度一致为32px */
+    position: relative;
+    background-color: #f5f5f5;
+}
+
+.score-marker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #bbb;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.score-label {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: #666;
+    white-space: nowrap;
+    margin-bottom: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1px 3px;
+    border-radius: 2px;
+}
+
+/* 进度条 */
+.ratio {
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+    position: relative;
+    transition: width 0.4s ease-in;
+    animation: barAnmi 1s ease-in;
+    z-index: 2;
+}
+
+/* 渐变色 */
+.blue-gradient {
+    background: linear-gradient(to left, #007bff, #0056b3);
+}
+
+.green-gradient {
+    background: linear-gradient(to left, #28a745, #1e7e34);
+}
+
+/* 进度条内的信息 */
+.socinfo {
+    font-size: 13px;
+    color: #fff;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+}
+
+.score-text {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* 当进度条太短时，文字显示在外部（进度条右侧） */
+.bar-text-outside {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 8px;
+    z-index: 3;
+}
+
+.bar-text-outside .device-name {
+    color: #666;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.bar-text-outside .score-value {
+    color: #333;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+/* 旧的text-outside样式可以删除，但保留以防向后兼容 */
+.text-outside .socinfo {
+    left: 100%;
+    margin-left: 10px;
+    color: #666;
+    font-size: 12px;
+}
+
+.text-outside .score-text {
+    left: 100%;
+    right: auto;
+    margin-left: 10px;
+    color: #333;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* 筛选按钮容器 */
+#filterButtons {
+    text-align: center;
+    padding: 40px 0 10px 0;
+    position: relative;
+    z-index: 100;
+    background: #fff;
+}
+
+/* 筛选按钮 */
+.downBtn {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    cursor: pointer;
+    padding: 6px 2%;
+    margin: 0 1%;
+    border-radius: 120px;
+    transition: all 0.3s;
+}
+
+.downBtn:hover {
+    background: #397DD6;
+    color: white;
+}
+
+/* 推荐NAS和天梯榜按钮的hover效果 */
+#btn4:hover,
+#btn5:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    color: white !important;
+    border-color: #dc2626 !important;
+}
+
+.allcpu {
+    background-color: black !important;
+    color: white !important;
+    border-color: black !important;
+}
+
+#btn1 {
+    color: black;
+}
+
+#btn1:hover {
+    background: black !important;
+    color: white !important;
+}
+
+#btn2 {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+#btn2:hover {
+    background: #28a745 !important;
+    color: white !important;
+    border-color: #28a745 !important;
+}
+
+#btn2.allcpu {
+    background: #28a745 !important;
+    color: white !important;
+    border-color: #28a745 !important;
+}
+
+#btn3 {
+    color: #007bff;
+    border-color: #007bff;
+}
+
+#btn3:hover {
+    background: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}
+
+#btn3.allcpu {
+    background: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}
+
+/* 动画 */
+@keyframes barAnmi {
+    0% {
+        width: 0%;
+    }
+}
+
+/* 响应式设计 */
+
+/* 平板设备 (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 768px) {
+    #tableContentWrapper {
+        width: 95%;
+    }
+
+    #caption {
+        font-size: 36px;
+    }
+
+    .socName {
+        font-size: 18px;
+        height: 26px;
+        line-height: 26px;
+    }
+
+    .data {
+        width: 100%;
+    }
+}
+
+/* ========================================
+   移动端卡片式布局 (≤767px)
+   ======================================== */
+@media (max-width: 767px) {
+    #tableContentWrapper {
+        width: 100%;
+    }
+
+    #mainLayout {
+        padding: 0 8px;
+        overflow-x: hidden;
+    }
+
+    /* 标题区域 */
+    #caption {
+        font-size: 24px;
+        margin-top: 16px;
+        margin-bottom: 8px;
+        letter-spacing: 0;
+    }
+
+    /* 统计横幅 */
+    .stats-banner {
+        padding: 8px 12px;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: none;
+        background: #f0f0f0;
+    }
+
+    .stats-container {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .stat-item {
+        gap: 4px;
+    }
+
+    .stat-item:first-child {
+        display: none;
+    }
+
+    /* 提示文字 */
+    .notice {
+        font-size: 13px;
+        padding: 8px 10px;
+        line-height: 1.6;
+        text-align: left;
+    }
+
+    .notice .faq-link {
+        display: inline-block;
+        margin-top: 4px;
+    }
+
+    /* 筛选按钮 - sticky 固定 */
+    #filterButtons {
+        position: sticky;
+        top: 48px;
+        z-index: 100;
+        background: rgba(247, 247, 247, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 10px 8px;
+        margin: 0 -8px;
+        border-bottom: 1px solid #e5e5e5;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        text-align: center;
+    }
+
+    .downBtn {
+        font-size: 12px;
+        padding: 6px 12px;
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        border-radius: 20px;
+        border-width: 1.5px;
+    }
+
+    .downBtn svg {
+        margin-right: 3px;
+        margin-top: 0;
+    }
+
+    .downBtn b {
+        display: inline;
+    }
+
+    /* table 显示隐藏由 JS 控制，这里不强制隐藏 */
+
+    /* ---- 移动端卡片样式 ---- */
+    #mobileCards {
+        padding: 8px 0;
+    }
+
+    .mobile-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+        border: 1px solid #f0f0f0;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .mobile-card-clickable {
+        cursor: pointer;
+    }
+
+    .mobile-card-clickable:active {
+        transform: scale(0.98);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    /* 卡片头部：排名 + CPU名称 + 架构标签 + NAS图标 */
+    .mobile-card-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .mobile-card-rank {
+        font-size: 13px;
+        font-weight: 700;
+        color: #999;
+        min-width: 28px;
+        flex-shrink: 0;
+    }
+
+    .mobile-card-cpu {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1a1a1a;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .mobile-card-arch {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 10px;
+        flex-shrink: 0;
+    }
+
+    .arch-x86 {
+        background: #eff6ff;
+        color: #2563eb;
+    }
+
+    .arch-arm {
+        background: #f0fdf4;
+        color: #16a34a;
+    }
+
+    .mobile-card-nas {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    /* 卡片进度条区域 */
+    .mobile-card-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .mobile-card-bar-track {
+        flex: 1;
+        height: 28px;
+        background: #f5f5f5;
+        border-radius: 6px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .mobile-card-bar-track .ratio {
+        height: 100%;
+        border-radius: 6px;
+        position: relative;
+        animation: barAnmi 0.8s ease-out;
+    }
+
+    .mobile-card-info {
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.9);
+        white-space: nowrap;
+    }
+
+    .mobile-card-score {
+        font-size: 16px;
+        font-weight: 700;
+        color: #333;
+        min-width: 60px;
+        text-align: right;
+        flex-shrink: 0;
+    }
+
+    /* 前三名高亮 */
+    .mobile-card:nth-child(1) .mobile-card-rank {
+        color: #f59e0b;
+    }
+
+    .mobile-card:nth-child(2) .mobile-card-rank {
+        color: #6b7280;
+    }
+
+    .mobile-card:nth-child(3) .mobile-card-rank {
+        color: #b45309;
+    }
+}
+
+/* 小屏手机微调 (≤480px) */
+@media (max-width: 480px) {
+    #caption {
+        font-size: 22px;
+        margin-top: 12px;
+    }
+
+    .stats-banner {
+        padding: 6px 10px;
+    }
+
+    .stats-container {
+        font-size: 11px;
+        gap: 8px;
+    }
+
+    #filterButtons {
+        gap: 5px;
+        padding: 8px 6px;
+    }
+
+    .downBtn {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+
+    .mobile-card {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .mobile-card-cpu {
+        font-size: 14px;
+    }
+
+    .mobile-card-score {
+        font-size: 15px;
+        min-width: 55px;
+    }
+
+    .mobile-card-bar-track {
+        height: 24px;
+    }
+
+    .mobile-card-info {
+        font-size: 10px;
+    }
+}
+
+/* 超小屏 (≤375px) */
+@media (max-width: 375px) {
+    #caption {
+        font-size: 20px;
+    }
+
+    .mobile-card-rank {
+        font-size: 12px;
+        min-width: 24px;
+    }
+
+    .mobile-card-cpu {
+        font-size: 13px;
+    }
+
+    .mobile-card-score {
+        font-size: 14px;
+        min-width: 50px;
+    }
+
+    .mobile-card-bar-track {
+        height: 22px;
+    }
+}

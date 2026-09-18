@@ -1,0 +1,36 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: leaderboard
+      DB_USER: leaderboard
+      DB_PASS: leaderboard
+      SITE_URL: http://localhost:8080
+      SITE_NAME: CPU Benchmark Leaderboard
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.6
+    environment:
+      MARIADB_DATABASE: leaderboard
+      MARIADB_USER: leaderboard
+      MARIADB_PASSWORD: leaderboard
+      MARIADB_ROOT_PASSWORD: root
+    volumes:
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./sql/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  db_data:

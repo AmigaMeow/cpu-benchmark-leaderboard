@@ -1,0 +1,9 @@
+# CPU Benchmark Leaderboard — URL 重写
+# /cpu/{slug}        → cpu-detail.php?slug={slug}
+# /cpu/{a}-vs-{b}    → cpu-compare.php?a={a}&b={b}
+
+RewriteEngine On
+
+# 实体页：必须先于对比页匹配（避免 {a}-vs-{b} 被整段吞掉）
+RewriteRule ^cpu/([a-z0-9]+(?:-[a-z0-9]+)*)-vs-([a-z0-9]+(?:-[a-z0-9]+)*)$ cpu-compare.php?a=$1&b=$2 [L,QSA]
+RewriteRule ^cpu/([a-z0-9]+(?:-[a-z0-9]+)*)$ cpu-detail.php?slug=$1 [L,QSA]

@@ -1,0 +1,57 @@
+-- 示例数据（全部为虚构，仅用于演示效果）
+SET NAMES utf8mb4;
+
+INSERT INTO `cpus`
+  (`model`, `architecture`, `cores`, `threads`, `base_frequency`, `max_frequency`, `process`, `tdp`, `release_date`, `coremark_score`, `has_real_test`, `status`, `sort_order`) VALUES
+  ('Intel N100',          'x86_64', '4',      4,  '0.8GHz',  '3.4GHz',  'Intel 7',   '6W',   '2023-01-03',  52100, 1, 1, 100),
+  ('Intel N150',          'x86_64', '4',      4,  '0.8GHz',  '3.6GHz',  'Intel 7',   '6W',   '2024-11-01',  56800, 1, 1, 100),
+  ('Intel N305',          'x86_64', '8',      8,  '1.8GHz',  '3.8GHz',  'Intel 7',   '15W',  '2023-01-03',  88400, 1, 1, 100),
+  ('J4125',         'x86_64', '4',      4,  '2.0GHz',  '2.7GHz',  '14nm',      '10W',  '2019-11-01',  31400, 1, 1, 90),
+  ('N5105',         'x86_64', '4',      4,  '2.0GHz',  '2.9GHz',  '10nm',      '10W',  '2021-01-11',  41200, 1, 1, 90),
+  ('N95',           'x86_64', '4',      4,  '1.7GHz',  '3.4GHz',  'Intel 7',   '15W',  '2023-01-03',  49300, 1, 1, 90),
+  ('N355',  'x86_64', '8',      8,  '1.9GHz',  '3.9GHz',  'Intel 7',   '15W',  '2025-01-01',  95700, 1, 1, 90),
+  ('i5-1235U',      'x86_64', '10',     12, '1.3GHz',  '4.4GHz',  'Intel 7',   '15W',  '2022-02-23', 132500, 1, 1, 80),
+  ('AMD Ryzen 5 5600U',   'x86_64', '6',      12, '2.3GHz',  '4.2GHz',  '7nm',       '15W',  '2021-01-12', 128900, 1, 1, 80),
+  ('AMD Ryzen 7 5825U',   'x86_64', '8',      16, '2.0GHz',  '4.5GHz',  '7nm',       '15W',  '2022-01-04', 155300, 1, 1, 80),
+  ('Intel Xeon E-2234',   'x86_64', '4',      8,  '3.6GHz',  '4.8GHz',  '14nm',      '71W',  '2019-06-01',  98400, 1, 1, 70),
+  ('RK3588',              'ARM64',  '8',      8,  '2.4GHz',  '2.4GHz',  '8nm',       '6W',   '2022-03-01',  73600, 1, 1, 100),
+  ('RK3568',              'ARM64',  '4',      4,  '2.0GHz',  '2.0GHz',  '22nm',      '5W',   '2020-11-01',  34200, 1, 1, 90),
+  ('RK3399',              'ARM64',  '6',      6,  '1.5GHz',  '2.0GHz',  '28nm',      '7W',   '2016-04-01',  28100, 1, 1, 80),
+  ('Amlogic S922X',       'ARM64',  '6',      6,  '1.8GHz',  '2.2GHz',  '12nm',      '5W',   '2019-09-01',  39700, 1, 1, 80),
+  ('Allwinner H618',      'ARM64',  '4',      4,  '1.5GHz',  '1.5GHz',  '28nm',      '4W',   '2022-05-01',  21800, 1, 1, 70),
+  ('Broadcom BCM2712',    'ARM64',  '4',      4,  '2.4GHz',  '2.4GHz',  '16nm',      '5W',   '2023-10-23',  45600, 1, 1, 90),
+  ('M4',            'ARM64',  '10',     10, '4.4GHz',  '4.4GHz',  '3nm',       '22W',  '2024-11-08', 238900, 1, 1, 60),
+  ('Qualcomm IPQ9574',    'ARM64',  '4',      4,  '2.2GHz',  '2.2GHz',  '14nm',      '6W',   '2023-04-01',  37900, 1, 1, 70),
+  ('MediaTek Filogic 830','ARMv7',  '4',      4,  '1.7GHz',  '1.7GHz',  '12nm',      '4W',   '2021-10-01',  18900, 1, 1, 60),
+  ('R1600',               'x86_64', '2',      4,  '2.6GHz',  '2.6GHz',  '14nm',      '12W',  '2019-05-01',  33400, 1, 1, 70),
+  ('AMD Ryzen V1500B',    'x86_64', '4',      8,  '2.2GHz',  '2.2GHz',  '14nm',      '16W',  '2018-02-01',  58600, 1, 1, 80),
+  ('Intel N5095',         'x86_64', '4',      4,  '2.0GHz',  '2.9GHz',  '10nm',      '15W',  '2021-01-11',  40900, 1, 1, 85),
+  ('N97',                 'x86_64', '4',      4,  '2.0GHz',  '3.6GHz',  'Intel 7',   '12W',  '2023-01-03',  51400, 1, 1, 95);
+
+INSERT INTO `benchmark_submissions`
+  (`cpu_model`, `device_brand`, `device_model`, `test_device`, `architecture`, `cores`, `score`, `os_info`, `status`, `submitted_at`) VALUES
+  ('Intel N100',           'Example', 'MiniNAS-4B',   'Example MiniNAS-4B',      'x86_64', 4,  52130.00, 'Debian 12',        'approved', '2026-08-12 10:21:00'),
+  ('Intel N100',           'Example', 'HomeBox-T2',   'Example HomeBox-T2',      'x86_64', 4,  51880.00, 'Ubuntu 24.04',     'approved', '2026-08-15 09:02:00'),
+  ('Intel N150',           'Example', 'MiniNAS-4C',   'Example MiniNAS-4C',      'x86_64', 4,  56810.00, 'Debian 12',        'approved', '2026-08-18 14:44:00'),
+  ('Intel N305',           'Example', 'TowerBox-8',   'Example TowerBox-8',      'x86_64', 8,  88420.00, 'TrueNAS SCALE',    'approved', '2026-07-30 19:15:00'),
+  ('J4125',          'Example', 'StoreIt-4',    'Example StoreIt-4',       'x86_64', 4,  31390.00, 'Debian 11',        'approved', '2026-07-22 08:33:00'),
+  ('N5105',          'Example', 'StoreIt-4Pro', 'Example StoreIt-4Pro',    'x86_64', 4,  41180.00, 'Ubuntu 22.04',     'approved', '2026-07-25 16:05:00'),
+  ('N95',            'Example', 'MiniNAS-2B',   'Example MiniNAS-2B',      'x86_64', 4,  49290.00, 'Debian 12',        'approved', '2026-08-01 11:27:00'),
+  ('N355',   'Example', 'TowerBox-8X',  'Example TowerBox-8X',     'x86_64', 8,  95710.00, 'TrueNAS SCALE',    'approved', '2026-08-20 13:58:00'),
+  ('i5-1235U',       'Example', 'DevServer-U',  'Example DevServer-U',     'x86_64', 10, 132540.00, 'Ubuntu 24.04',     'approved', '2026-06-18 10:40:00'),
+  ('AMD Ryzen 5 5600U',    'Example', 'DevServer-R5', 'Example DevServer-R5',    'x86_64', 6,  128870.00, 'Ubuntu 22.04',     'approved', '2026-06-21 17:12:00'),
+  ('AMD Ryzen 7 5825U',    'Example', 'DevServer-R7', 'Example DevServer-R7',    'x86_64', 8,  155290.00, 'Ubuntu 24.04',     'approved', '2026-06-25 20:01:00'),
+  ('Intel Xeon E-2234',    'Example', 'RackNode-1U',  'Example RackNode-1U',     'x86_64', 4,  98380.00,  'Debian 12',        'approved', '2026-05-14 07:45:00'),
+  ('RK3588',               'Example', 'ArmBox-3588',  'Example ArmBox-3588',     'ARM64',  8,  73590.00,  'Armbian 24.08',    'approved', '2026-08-09 12:30:00'),
+  ('RK3568',               'Example', 'ArmBox-3568',  'Example ArmBox-3568',     'ARM64',  4,  34180.00,  'Armbian 24.08',    'approved', '2026-08-03 15:20:00'),
+  ('RK3399',               'Example', 'ArmBox-3399',  'Example ArmBox-3399',     'ARM64',  6,  28120.00,  'Armbian 23.11',    'approved', '2026-07-19 09:50:00'),
+  ('Amlogic S922X',        'Example', 'TVBox-S922X',  'Example TVBox-S922X',     'ARM64',  6,  39680.00,  'CoreELEC 21',      'approved', '2026-07-28 18:26:00'),
+  ('Allwinner H618',       'Example', 'ArmBox-H618',  'Example ArmBox-H618',     'ARM64',  4,  21780.00,  'Armbian 24.05',    'approved', '2026-06-30 08:11:00'),
+  ('Broadcom BCM2712',     'Example', 'Pi5-8G',       'Example Pi5-8G',          'ARM64',  4,  45590.00,  'Raspberry Pi OS',  'approved', '2026-08-11 16:47:00'),
+  ('M4',             'Example', 'Mini-M4',      'Example Mini-M4',         'ARM64',  10, 238880.00, 'macOS 15',         'approved', '2026-08-16 21:09:00'),
+  ('Qualcomm IPQ9574',     'Example', 'Router-Q9574', 'Example Router-Q9574',    'ARM64',  4,  37880.00,  'OpenWrt 24.10',    'approved', '2026-07-08 05:37:00'),
+  ('MediaTek Filogic 830', 'Example', 'Router-F830',  'Example Router-F830',     'ARMv7',  4,  18890.00,  'OpenWrt 23.05',    'approved', '2026-06-11 13:02:00'),
+  ('R1600',                'Example', 'StoreIt-V2',   'Example StoreIt-V2',      'x86_64', 2,  33380.00,  'Ubuntu 22.04',     'approved', '2026-07-15 10:55:00'),
+  ('AMD Ryzen V1500B',     'Example', 'StoreIt-V4',   'Example StoreIt-V4',      'x86_64', 4,  58590.00,  'Debian 12',        'approved', '2026-07-17 14:21:00'),
+  ('Intel N5095',          'Example', 'MiniNAS-4D',   'Example MiniNAS-4D',      'x86_64', 4,  40880.00,  'Ubuntu 22.04',     'approved', '2026-08-05 09:40:00'),
+  ('N97',                  'Example', 'MiniNAS-4E',   'Example MiniNAS-4E',      'x86_64', 4,  51400.00,  'Debian 12',        'approved', '2026-08-22 16:30:00');
