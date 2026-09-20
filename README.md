@@ -122,6 +122,11 @@ assets/css|js                前端资源（html2canvas 本地打包，MIT）
 
 欢迎 issue 与 PR。提交前请先读 [docs/SPEC.md](docs/SPEC.md) 的边界说明。
 
+## 相关项目
+
+- [**llm-leaderboard-data**](https://github.com/AmigaMeow/llm-leaderboard-data) —— 每日自动更新的大模型排行榜数据
+- [**llm-benchmark-leaderboard**](https://github.com/AmigaMeow/llm-benchmark-leaderboard) —— 自托管的大模型排行榜程序
+
 ## License
 
 [MIT](LICENSE) © 2026 17nas.com
